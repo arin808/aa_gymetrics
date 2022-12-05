@@ -1,0 +1,442 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "xohhj6tneh0qr"
+  },
+  "info": {
+    "title": "AA Gymetrics",
+    "version": "1.0",
+    "summary": "Capstone API ",
+    "description": "This api serves as a means of pulling information from the MongoDB database that contains student, employee data, as well as the necessary gym metrics and houses the login history."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/student/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "student's id number"
+        }
+      ],
+      "get": {
+        "summary": "Get Student by ID",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Student Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                },
+                "examples": {
+                  "Get Student 20612909": {
+                    "value": {
+                      "studentID": 20612909,
+                      "studentFirst": "Arin",
+                      "studentLast": "Aihara",
+                      "studentEmail": "aaihara@my.gcu.edu"
+                    }
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Student Not Found"
+          }
+        },
+        "operationId": "get-student-id",
+        "description": "Retrieves a student based on their ID number"
+      }
+    },
+    "/employee/{email}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "email",
+          "in": "path",
+          "required": true,
+          "description": "employee's email"
+        }
+      ],
+      "get": {
+        "summary": "Get Employee by Email",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Employee Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                },
+                "examples": {
+                  "Get Employee by Email": {
+                    "value": {
+                      "empID": 1,
+                      "empFirst": "Arin",
+                      "empLast": "Aihara",
+                      "empEmail": "arin.aihara@gcu.edu",
+                      "empPassword": "Kojiro"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Employee Not Found"
+          }
+        },
+        "operationId": "get-employee-email",
+        "description": "Retrieves an employee by their email",
+        "parameters": []
+      }
+    },
+    "/sum/{gym}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "gym",
+          "in": "path",
+          "required": true,
+          "description": "gym to search for sum"
+        }
+      ],
+      "get": {
+        "summary": "Get the Sum of Students for a Given Gym",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Students Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                },
+                "examples": {
+                  "Get Chaparral Sum": {
+                    "value": 12
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No Students Found"
+          }
+        },
+        "operationId": "get-sum-gym",
+        "description": "Retrieves the sum of active users in a given gym"
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Insert a Login Entry",
+        "operationId": "post-login",
+        "responses": {
+          "200": {
+            "description": "Entry successfully inserted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login-Entry"
+                },
+                "examples": {
+                  "Insert Login Entry": {
+                    "value": {
+                      "logID": 1,
+                      "empID": 1,
+                      "empEmail": "arin.aihara@gcu.edu",
+                      "gymLocation": "LPC",
+                      "timestamp": "2019-08-24T14:15:22Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "description": "Writes an entry to the database containing login information",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login-Entry"
+              },
+              "examples": {
+                "Insert Login Entry": {
+                  "value": {
+                    "logID": 1,
+                    "empID": 1,
+                    "empEmail": "arin.aihara@gcu.edu",
+                    "gymLocation": "LPC",
+                    "timestamp": "2019-08-24T14:15:22Z"
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/check-in": {
+      "post": {
+        "summary": "Insert an Active Student Entry",
+        "operationId": "post-check-in",
+        "responses": {
+          "200": {
+            "description": "Entry successfully inserted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Active-Student"
+                },
+                "examples": {
+                  "Insert Active Student": {
+                    "value": {
+                      "studentID": 20612909,
+                      "studentFirst": "Arin",
+                      "studentLast": "Aihara",
+                      "checkInTime": "14:15:22Z",
+                      "gymLocation": "LPC"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "description": "Writes a new entry of an active student in the gym to the active table",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Active-Student"
+              },
+              "examples": {
+                "Insert Active Student": {
+                  "value": {
+                    "studentID": 20612909,
+                    "studentFirst": "Arin",
+                    "studentLast": "Aihara",
+                    "checkInTime": "14:15:22Z",
+                    "gymLocation": "LPC"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/check-out/{id}": {
+      "delete": {
+        "summary": "Delete an Active Student Entry",
+        "operationId": "delete-check-out",
+        "responses": {
+          "200": {
+            "description": "Student Successfully Checked Out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                },
+                "examples": {
+                  "Checkout Student 20612909 ": {
+                    "value": 20612909
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "description": "Deletes a student's entry from the active table"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "student's ID"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "Student": {
+        "type": "object",
+        "minProperties": 4,
+        "properties": {
+          "studentID": {
+            "type": "integer",
+            "description": "Unique student ID"
+          },
+          "studentFirst": {
+            "type": "string"
+          },
+          "studentLast": {
+            "type": "string"
+          },
+          "studentEmail": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "studentID",
+          "studentFirst",
+          "studentLast",
+          "studentEmail"
+        ],
+        "title": "Student",
+        "description": "Student model",
+        "x-stoplight": {
+          "id": "b5d4f13858229"
+        }
+      },
+      "Employee": {
+        "type": "object",
+        "minProperties": 4,
+        "title": "Employee",
+        "description": "Employee model",
+        "x-stoplight": {
+          "id": "118526fb20b40"
+        },
+        "properties": {
+          "empID": {
+            "type": "integer",
+            "description": "Unique employee ID"
+          },
+          "empFirst": {
+            "type": "string"
+          },
+          "empLast": {
+            "type": "string"
+          },
+          "empEmail": {
+            "type": "string"
+          },
+          "empPassword": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "empID",
+          "empFirst",
+          "empLast",
+          "empEmail",
+          "empPassword"
+        ]
+      },
+      "Login-Entry": {
+        "title": "Login-Entry",
+        "x-stoplight": {
+          "id": "5a1lg6c25byv3"
+        },
+        "type": "object",
+        "properties": {
+          "logID": {
+            "type": "integer"
+          },
+          "empID": {
+            "type": "integer"
+          },
+          "empEmail": {
+            "type": "string"
+          },
+          "gymLocation": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "logID",
+          "empID",
+          "empEmail",
+          "gymLocation",
+          "timestamp"
+        ],
+        "description": "Login entry model"
+      },
+      "Active-Student": {
+        "title": "Active-Student",
+        "x-stoplight": {
+          "id": "aw98giikznoc8"
+        },
+        "type": "object",
+        "description": "Model for Active Student entry",
+        "properties": {
+          "studentID": {
+            "type": "integer"
+          },
+          "studentFirst": {
+            "type": "string"
+          },
+          "studentLast": {
+            "type": "string"
+          },
+          "checkInTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "gymLocation": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "studentID",
+          "studentFirst",
+          "studentLast",
+          "checkInTime",
+          "gymLocation"
+        ]
+      }
+    },
+    "securitySchemes": {},
+    "examples": {}
+  },
+  "x-internal": true
+}
