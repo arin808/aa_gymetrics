@@ -45,9 +45,11 @@ Zipped code will require npm install for dependencies
  - Special thanks to Michael Duisenberg for the assistance in utilization of Mongoose.
 ## Features
 
+- Single Page Application (SPA)
 - Live metrics for each gym
+- Employee login
 - Employee managed student check-in and check-out
--
+- Barcode compatability 
 
 
 ## API Documentation
