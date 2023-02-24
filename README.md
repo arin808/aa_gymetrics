@@ -155,7 +155,7 @@ Zipped code will require npm install for dependencies
 ### ER 
 ![ER](https://github.com/arin808/aa_gymetrics/blob/main/images/MongoDB%20ER.png?raw=true)
 ### Physical 
-![Physical](https://github.com/arin808/aa_gymetrics/blob/main/images/Physical%20Diagram.png?raw=true)
+![Physical](https://github.com/arin808/aa_gymetrics/blob/main/images/Physical%20Diagram.jpg?raw=true)
 ### Logical 
 ![Logical](https://github.com/arin808/aa_gymetrics/blob/main/images/Logical%20Diagram.png?raw=true)
 ## Screenshots
