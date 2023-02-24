@@ -157,7 +157,7 @@ Zipped code will require npm install for dependencies
 ### Physical 
 ![Physical](https://github.com/arin808/aa_gymetrics/blob/main/images/Physical%20Diagram.jpg?raw=true)
 ### Logical 
-![Logical](https://github.com/arin808/aa_gymetrics/blob/main/images/Logical%20Diagram.png?raw=true)
+![Logical](https://github.com/arin808/aa_gymetrics/blob/main/images/Logical%20Diagram.jpg?raw=true)
 ## Screenshots
 
 ### Home/Landing Page
