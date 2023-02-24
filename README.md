@@ -1,4 +1,4 @@
-![Logo](https://github.com/arin808/aa_gymetrics/blob/main/images/logo.png?raw=true)
+![Logo](https://github.com/arin808/aa_gymetrics/blob/main/images/Logo.jpg?raw=true)
 
 
 
