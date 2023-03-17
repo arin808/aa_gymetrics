@@ -4,11 +4,9 @@
 
 # AA Gymetrics 
 
-The purpose of this web application is to provide gym-goers with a means of knowing how crowded a gym is. With live metrics, this web application aims to provide information to regualar students that regularly go to the gym as a convenience.
+AA Gymetrics came about since I started to go to the gym a lot more regularly and noticed an issue once school started up again. Finding a time to go to the gym became a chore, since I wanted to avoid the heavy crowds in the gym. If only there was a way of seeing how crowded a gym is at any given time... Thus AA Gymetrics was born. 
 
-Zipped code will require npm install for dependencies
-
-
+By providing live metrics fn each gym on campus, people would be able to avoid the heavy crowds and choose which gym they'd like to go to based on the gym's population density and avoid a potentially less than ideal gym experience.
 
 ## Authors
 
