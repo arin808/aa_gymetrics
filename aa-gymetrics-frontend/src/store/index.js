@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 //Export mutations for global use
 export const LOGIN = "LOGIN";
@@ -21,9 +22,11 @@ export const mutations = {
   [LOGIN](state) {
     state.loggedIn = true;
   },
-  //Change state to false
+  //Change state properties to null or false to prevent access to pages
   [LOGOUT](state) {
     state.loggedIn = false;
+    state.employeeName = null;
+    state.gymLocation = null;
   },
   //Change employee state properties to determine which landing page to display
   [GYM_LOCATION](state, location) {
@@ -34,11 +37,11 @@ export const mutations = {
     state.employeeName = name;
   },
 };
-
 //Store object to export
 const store = createStore({
   state,
   mutations,
+  plugins: [createPersistedState()],
   strict: process.env.NODE_ENV !== "production",
 });
 

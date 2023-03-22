@@ -4,7 +4,7 @@ import axios from "axios";
 const getCountChaparral = async () => {
   //baseURL use localhost from env variable
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Axios call to get Chaparral count
+  //Axios call to express application to get Chaparral count
   const response = await axios.get(`${baseUrl}/actives/count/Chaparral`);
   return response.data;
 };

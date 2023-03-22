@@ -7,7 +7,7 @@ const newLog = async (employee, gymLocation) => {
   //Create new date object for current time for log obj
   const newDate = new Date().toString();
 
-  //Axios post call
+  //Axios post call to express route to write new log
   const response = await axios.post(`${baseUrl}/logins`, {
     //Assign passed props to new employee login object
     empID: employee.empID,

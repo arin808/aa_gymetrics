@@ -4,7 +4,8 @@ import axios from "axios";
 const getAllAntelope = async () => {
   //Base api url from env variable
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Axios call to get all students in Antelope
+  //Axios uses express app's mongoose built-ins to
+  //query for all students in the Antelope gym
   const response = await axios.get(`${baseUrl}/actives/Antelope`);
   return response.data;
 };

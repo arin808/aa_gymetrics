@@ -4,11 +4,11 @@
       <!--Dropdown button-->
       <button
         ref="btnDropdownRef"
-        class="flex text-white text-lg px-6 py-3 rounded hover:bg-btn-primary-alt w-full bg-btn-primary-blue"
+        class="flex text-white text-lg px-6 py-3 rounded hover:bg-btn-success-alt w-full bg-btn-success-grn"
         type="button"
         @click="toggleDropdown()"
       >
-        <!--Employee Greeting (will be changed to use Employee name)-->
+        <!--Employee Greeting-->
         Hello {{ employeeName }}&emsp;
         <div class="flex items-center object-contain h-6 w-6">
           <!--Utilize computed method to determine which icon to show-->

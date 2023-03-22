@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     res.status(200).json(login);
   } catch (error) {
     //DIsplay error message
-    res.status(500).json({ message: error.message });
+    res.status(403).json({ message: error.message });
   }
 });
 
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
     res.status(200).json(true);
   } catch (error) {
     //Update status and display error
-    res.status(500).json({ message: error.message });
+    res.status(403).json({ message: error.message });
   }
 });
 

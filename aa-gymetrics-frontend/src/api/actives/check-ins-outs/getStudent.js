@@ -4,7 +4,7 @@ import axios from "axios";
 const getStudent = async (studentID) => {
   //Base api url from env variable
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Axios call to get a student from ID
+  //Axios call to express application get a student from ID
   const response = await axios.get(`${baseUrl}/students/${studentID}`);
   return response.data;
 };

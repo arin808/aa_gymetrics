@@ -92,6 +92,8 @@ export default {
     };
   },
   //Percentages based on headcount and max capacity
+  //Capacity is a rough estimate
+  //Percentages are formatted for readability
   computed: {
     //Chaparral capacity %
     chapPercentage() {
@@ -133,7 +135,7 @@ export default {
     clearInterval(this.interval);
   },
   async mounted() {
-    //Call get functions for api data
+    //Call get functions for api data of active counts in gyms
     this.chapCount = await getCountChaparral();
     this.lpcCount = await getCountLPC();
     this.papCount = await getCountLittlePapago();

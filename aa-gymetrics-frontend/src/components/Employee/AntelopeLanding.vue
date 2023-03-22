@@ -2,6 +2,7 @@
   <!--Only displays page if logged in-->
   <div>
     <!--Alert modal if a student thats already checked in attempts to check in-->
+    <!--Button will emit an event calling the method to close the modal-->
     <alert-modal
       id="existingAlertModal"
       style="display: none"
@@ -10,6 +11,7 @@
       @emit-close-modal="closeExistingAlertModal"
     />
     <!--Alert modal if a check in attempt doesnt satisfy required ID length-->
+    <!--Button will emit an event calling the method to close the modal-->
     <alert-modal
       id="lengthAlertModal"
       style="display: none"
@@ -18,6 +20,7 @@
       @emit-close-modal="closeLengthAlertModal"
     />
     <!--Alert modal if a student can't be found/doesn't exist-->
+    <!--Button will emit an event calling the method to close the modal-->
     <alert-modal
       id="noStudentAlertModal"
       style="display: none"
@@ -25,14 +28,14 @@
       message-text="We couldn't find a student with a matching ID number."
       @emit-close-modal="closeNoStudentAlertModal"
     />
-    <div class="font-poppins h-40">
+    <div class="font-poppins">
       <!--Header for specific gym-->
       <h1 class="flex font-bold text-4xl w-full justify-center bg-white py-4">
         Antelope Fitness Center
       </h1>
       <div class="items-center w-full px-12 py-2">
         <!--List for each student entry-->
-        <ul class="h-96 overflow-y-scroll overflow-hidden">
+        <ul class="h-screen overflow-y-scroll overflow-hidden">
           <!--Iterate over results and create entry for each item in array-->
           <student-entry
             v-for="student in students"
@@ -55,11 +58,14 @@
             type="number"
             placeholder="Student ID"
             class="underline w-36 outline-none text-blue-700"
+            autofocus
           />
-          <!--Check in button-->
+          <!--Check in/check out button-->
+          <!--Button will also automatically process a check out if a valid ID 
+            is scanned/entered and they are in the same gym-->
           <action-button
-            type="success"
-            text="Check In"
+            type="primary"
+            text="Check In/Check Out"
             class="h-14 items-center text-center"
             @click.prevent="checkIn"
           />
@@ -85,7 +91,6 @@ export default {
   components: {
     StudentEntry,
     ActionButton,
-
     AlertModal,
   },
   data() {
@@ -97,21 +102,21 @@ export default {
     };
   },
 
-  //Mount get result to show all active students in the gym
+  //Mount get result to show all active students in the gym on page load
   async mounted() {
     this.students = await getAllAntelope();
   },
   methods: {
     //Method for check in
     async checkIn() {
-      //Constants for modal display
+      //Constants for modal display to close or display them if necessary
       const lengthAlertModal = document.getElementById("lengthAlertModal");
       const existingAlertModal = document.getElementById("existingAlertModal");
       const noStudentAlertModal = document.getElementById(
         "noStudentAlertModal"
       );
 
-      //Validation for id entry length
+      //Validation for id entry length; ID must be 8 digits
       if (String(this.studentID).length != 8) {
         //If exact length isnt met, display modal
         return (lengthAlertModal.style.display = "block");
@@ -121,13 +126,20 @@ export default {
       if (student) {
         //Check if student is already in a gym to avoid duplication
         const existing = await checkForExisting(this.studentID);
-        //Return alert message if student is already active
+        //If student is already checked in, check if they are in
+        //the same gym
         if (existing) {
-          //If student is already checked in, display modal
+          //If they are in the same gym, process a check out and reset ID property
+          if (existing.gymLocation == "Antelope") {
+            this.checkOut(existing.studentID);
+            return (this.studentID = "");
+          }
+          //If student is already checked in elsewhere, display modal
           return (existingAlertModal.style.display = "block");
         }
 
-        //Process check in
+        //If no matching student is found to be active,
+        //process check in
         const response = await checkIn(student, "Antelope");
         console.log(response.data);
         //Reload students array to reflect changes
@@ -176,5 +188,8 @@ ul {
   border: 3px solid black;
   padding: 4px;
   border-radius: 5px;
+}
+.h-screen {
+  height: 60vh;
 }
 </style>

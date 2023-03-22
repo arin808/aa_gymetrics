@@ -96,7 +96,7 @@
 
 <script>
 import ActionButton from "@/components/Shared/ActionButton.vue";
-import employeeLogin from "@/api/employee/employeeLogin";
+import getEmployee from "@/api/employee/getEmployee";
 import AlertModal from "@/components/Shared/AlertModal.vue";
 import newLog from "@/api/employee/newLog.js";
 import "tw-elements";
@@ -157,15 +157,17 @@ export default {
       }
 
       //Temp variable to hold employee object
-      const employee = await employeeLogin(this.employeeEmail);
+      const employee = await getEmployee(this.employeeEmail);
 
       if (employee) {
         //Check if email and password match and display modal if they don't
         if (employee.empEmail == this.employeeEmail) {
           console.log("email matches");
-          if (employee.empPassword == this.employeePassword) {
-            console.log("password matches");
-
+          //Hash pw for comparison
+          const md5 = require("blueimp-md5");
+          const hashPw = md5(this.employeePassword);
+          //Check if hashed password matches
+          if (employee.empPassword == hashPw) {
             //If email and password match, set state properties, write log and redirect
             this.LOGIN();
             this.GYM_LOCATION(this.selectedGym);

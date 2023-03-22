@@ -4,7 +4,8 @@ import axios from "axios";
 const getAllLittlePapago = async () => {
   //Base api url from env variable
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Axios call to get all actives in Little Papago
+  //Axios uses express app's mongoose built-ins to
+  //query for all students in the Little Papago gym
   const response = await axios.get(`${baseUrl}/actives/Little-Papago`);
   return response.data;
 };

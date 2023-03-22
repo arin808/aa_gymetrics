@@ -4,7 +4,7 @@ import axios from "axios";
 const getCountAntelope = async () => {
   //baseURL use localhost from env variable
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Axios call to get count of Antelope
+  //Axios call to express application get count of Antelope
   const response = await axios.get(`${baseUrl}/actives/count/Antelope`);
   return response.data;
 };

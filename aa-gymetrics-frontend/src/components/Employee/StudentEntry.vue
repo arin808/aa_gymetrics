@@ -38,6 +38,7 @@
           <div class="mt-3 text-center font-poppins">
             <div class="text-3xl font-bold text-black">Checkout?</div>
             <div class="mt-2 px-7 py-3">
+              <!--Confirmation of checkout prevent misclicks-->
               <div class="text-lg font-semibold text-black">
                 Are you sure you want to checkout
                 {{ student.studentFirst }}?

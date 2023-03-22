@@ -4,7 +4,7 @@ import axios from "axios";
 const getCountJuniper = async () => {
   //baseURL use localhost from env variable
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Axios get call to get Juniper count
+  //Axios get call to express application to get Juniper count
   const response = await axios.get(`${baseUrl}/actives/count/Juniper`);
   return response.data;
 };
