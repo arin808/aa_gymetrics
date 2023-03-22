@@ -44,7 +44,7 @@ router.get("/:gymLocation", async (req, res) => {
     res.status(200).json(specificGymActives);
   } catch (error) {
     //Update status
-    res.status(500).json({ message: error.message });
+    res.status(403).json({ message: error.message });
   }
 });
 
@@ -64,7 +64,7 @@ router.get("/count/:gymLocation", async (req, res) => {
     res.status(200).json(active);
   } catch (error) {
     //Update status and display error message
-    res.status(500).json({ message: error.message });
+    res.status(403).json({ message: error.message });
   }
 });
 

@@ -4,7 +4,7 @@ import axios from "axios";
 const checkOut = async (studentID) => {
   //Base api url from env variable
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Axios delete call
+  //Axios delete call from express route
   const response = await axios.delete(
     `${baseUrl}/actives/checkOut/${studentID}`
   );

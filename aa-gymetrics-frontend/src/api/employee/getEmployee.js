@@ -1,12 +1,12 @@
 import axios from "axios";
 
 //Function to process employee login
-const employeeLogin = async (empEmail) => {
+const getEmployee = async (empEmail) => {
   //Base url for api call
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Actual api call for employee query
+  //Axios call to express app to get employee data based off of email
   const response = await axios.get(`${baseUrl}/employees/${empEmail}`);
   return response.data;
 };
 
-export default employeeLogin;
+export default getEmployee;

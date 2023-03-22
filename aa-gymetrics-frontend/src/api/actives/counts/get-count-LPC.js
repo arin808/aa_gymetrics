@@ -4,7 +4,7 @@ import axios from "axios";
 const getCountLPC = async () => {
   //Base api url from env variable
   const baseUrl = process.env.VUE_APP_API_URL;
-  //Axios call to get LPC count
+  //Axios call to express application to get LPC count
   const response = await axios.get(`${baseUrl}/actives/count/LPC`);
   return response.data;
 };

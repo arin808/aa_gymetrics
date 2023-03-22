@@ -26,6 +26,5 @@ library.add(faEyeSlash);
 createApp(App)
   .use(store)
   .use(router)
-  //  .use(VueSession)
   .component("font-awesome-icon", FontAwesomeIcon)
   .mount("#app");

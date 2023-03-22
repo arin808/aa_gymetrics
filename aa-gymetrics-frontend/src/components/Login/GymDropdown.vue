@@ -8,7 +8,7 @@
         type="button"
         @click="toggleDropdown()"
       >
-        <!--Employee Greeting (will be changed to use Employee name)-->
+        <!--Dropdown for all gym locations for shifts -->
         {{ selected }} &emsp;
         <div class="flex items-center object-contain h-6 w-6">
           <!--Utilize computed method to determine which icon to show-->
@@ -26,7 +26,7 @@
         }"
         class="text-md z-50 float-left text-right rounded w-full"
       >
-        <!--Action button component to logout user-->
+        <!--Action buttons -->
         <action-button
           class="h-full w-full"
           text="LPC"
