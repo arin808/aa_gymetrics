@@ -6,6 +6,10 @@ const getCountAntelope = async () => {
   const baseUrl = process.env.VUE_APP_API_URL;
   //Axios call to express application get count of Antelope
   const response = await axios.get(`${baseUrl}/actives/count/Antelope`);
+
+  //Production api call
+  //const response = await axios.get('/actives/count/Antelope');
+
   return response.data;
 };
 

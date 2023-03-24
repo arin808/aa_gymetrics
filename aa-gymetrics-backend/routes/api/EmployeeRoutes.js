@@ -2,7 +2,6 @@
 const { Router } = require("express");
 const Employees = require("../../models/Employees");
 const router = Router();
-const jwt = require("jsonwebtoken");
 
 //Get employee by ID for login
 router.get("/:empEmail", async (req, res) => {
@@ -20,16 +19,5 @@ router.get("/:empEmail", async (req, res) => {
   }
 });
 
-router.get("/token/:empEmail", async (req, res) => {
-  try {
-    const employee = await Employees.findOne({
-      empEmail: req.params.empEmail,
-    });
-    const token = jwt.sign({ employee }, "secret");
 
-    res.status(200).json(token);
-  } catch (error) {
-    res.status(403).json({ message: error.message });
-  }
-});
 module.exports = router;

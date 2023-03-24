@@ -7,6 +7,11 @@ const checkForExisting = async (studentID) => {
   //Axios uses express app's mongoose built-in to
   //query for a student by their ID
   const response = await axios.get(`${baseUrl}/actives/existing/${studentID}`);
+
+  //Production api call
+  //const response = await axios.get(`/actives/existing/${studentID}`);
+
+
   return response.data;
 };
 

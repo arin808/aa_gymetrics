@@ -16,6 +16,16 @@ const newLog = async (employee, gymLocation) => {
     timestamp: newDate,
   });
 
+//Axios post call to express route to write new log
+// const response = await axios.post(`${baseU/logins`, {
+//   //Assign passed props to new employee login object
+//   empID: employee.empID,
+//   empEmail: employee.empEmail,
+//   gymLocation: gymLocation,
+//   timestamp: newDate,
+// });
+
+  
   return response.data;
 };
 

@@ -6,6 +6,10 @@ const getCountVerdeRiver = async () => {
   const baseUrl = process.env.VUE_APP_API_URL;
   //Axios call to express application to get all from Verde River
   const response = await axios.get(`${baseUrl}/actives/count/Verde-River`);
+
+  //Production api call
+  //const response = await axios.get('/actives/count/Verde-River');
+
   return response.data;
 };
 

@@ -8,6 +8,11 @@ const checkOut = async (studentID) => {
   const response = await axios.delete(
     `${baseUrl}/actives/checkOut/${studentID}`
   );
+
+  //Production api call
+  // const response = await axios.delete(
+  //   `/actives/checkOut/${studentID}`
+  // );
   return response.data;
 };
 

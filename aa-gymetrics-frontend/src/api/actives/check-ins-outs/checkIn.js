@@ -23,6 +23,15 @@ const checkIn = async (student, gymLocation) => {
     gymLocation: gymLocation,
   });
 
+  //Production api call
+  // const response = await axios.post('/actives/checkIn', {
+  //   //Assign passed props to new Active student object props
+  //   studentID: student.studentID,
+  //   studentFirst: student.studentFirst,
+  //   studentLast: student.studentLast,
+  //   checkInTime: dateString,
+  //   gymLocation: gymLocation,
+  // });
   return response.data;
 };
 
