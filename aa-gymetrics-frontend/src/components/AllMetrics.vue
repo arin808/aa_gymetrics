@@ -1,5 +1,12 @@
 <template>
   <div class="font-poppins w-full h-full p-8">
+    <alert-modal
+      id="tableErrorModal"
+      style="display: none"
+      message-header="Error Retrieving Data"
+      message-text="Sorry, we ran into an error while retrieving that data for the tables. Please try again later."
+      @emit-close-modal="closeTableErrorModal"
+    />
     <!--Welcome message-->
     <h1 class="flex font-bold text-4xl w-full justify-center pb-4">
       Welcome to AA Gymetrics!
@@ -72,19 +79,22 @@ import getCountJuniper from "@/api/actives/counts/get-count-Juniper";
 import getCountAntelope from "@/api/actives/counts/get-count-Antelope";
 import getCountLittlePapago from "@/api/actives/counts/get-count-LittlePapago";
 import getCountVerdeRiver from "@/api/actives/counts/get-count-VerdeRiver";
+import AlertModal from "@/components/Shared/AlertModal.vue";
 
 export default {
   name: "AllMetrics",
+  components: { AlertModal },
   //Data values to assign api return values to
   data() {
     return {
       //Gym headcounts
-      lpcCount: 0,
-      junCount: 0,
-      chapCount: 0,
-      papCount: 0,
-      antCount: 0,
-      verCount: 0,
+      //Default as null for error handling
+      lpcCount: null,
+      junCount: null,
+      chapCount: null,
+      papCount: null,
+      antCount: null,
+      verCount: null,
       //Interval time
       interval: null,
       //Time of last update
@@ -142,6 +152,21 @@ export default {
     this.antCount = await getCountAntelope();
     this.verCount = await getCountVerdeRiver();
     this.junCount = await getCountJuniper();
+
+    //If any functions aren't returning data, display error modal
+    if (
+      this.chapCount == null ||
+      this.lpcCount == null ||
+      this.papCount == null ||
+      this.antCount == null ||
+      this.verCount == null ||
+      this.junCount == null
+    ) {
+      //Display error modal
+      const alertModal = document.getElementById("tableErrorModal");
+      alertModal.style.display = "block";
+    }
+
     //Create a date object
     const date = new Date();
     //Utilize date object to display time of update
@@ -167,15 +192,34 @@ export default {
         this.antCount = await getCountAntelope();
         this.verCount = await getCountVerdeRiver();
         this.junCount = await getCountJuniper();
+
+        //If any functions aren't returning data, display error modal
+        if (
+          this.chapCount == null ||
+          this.lpcCount == null ||
+          this.papCount == null ||
+          this.antCount == null ||
+          this.verCount == null ||
+          this.junCount == null
+        ) {
+          //Display error modal
+          const alertModal = document.getElementById("tableErrorModal");
+          alertModal.style.display = "block";
+        }
+
         //Create a date object
         const date = new Date();
-        //Utilize date object to display time of update
+        //Utilize (date object to display time of update
         this.updateTime = date.toLocaleTimeString("en-us", {
           hour12: false,
           hour: "2-digit",
           minute: "2-digit",
         });
       }, 10000);
+    },
+    closeTableErrorModal() {
+      const modal = document.getElementById("tableErrorModal");
+      modal.style.display = false;
     },
   },
 };
